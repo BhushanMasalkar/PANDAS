@@ -1,0 +1,25 @@
+#importing the libraries
+import numpy as np
+import pandas as pd
+#How-to-count-distance-to-the-previous-zero
+list_1=[7, 2, 0, 3, 4, 2, 5, 0, 3, 4]
+#creating dataFrame of values in list_1
+df = pd.DataFrame({'X':list_1})
+#creating new column 'Y' in df
+df['Y']=0
+#initialising distance value to be -1
+distance=-1
+#running loop for each row in df
+for k in range(0,len(list_1)):
+    #checking if value in column 'X' is zero then set distance to zero
+    if df.loc[k]['X'] == 0:
+        distance = 0
+     #for initial case writing the index of value if no zero found yet
+    elif distance == -1:
+        df.loc[k]['Y'] = k+1
+    #else increasing distance value and copying into the column 'Y'
+    else:
+        distance = distance+1
+        df.loc[k]['Y'] = distance
+#printing the dataframe
+df

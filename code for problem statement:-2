@@ -1,0 +1,15 @@
+#Creating a DatetimeIndex that contains each business day of 2015  
+dti = pd.date_range(start='2015-01-01', end='2015-12-31', freq='B') 
+#using it to index a Series of random numbers
+s = pd.Series(np.random.rand(len(dti)), index=dti)
+#sum of the values in s for every Wednesday
+o1 = s[dti.weekday == 2].sum() 
+print("The sum of the values in s for every Wednesday is {}".format(o1),end='\n\n')
+#Average For each calendar month
+o2 = s.resample('M').mean()
+print("Average For each calendar month is: ")
+print(o2,end='\n\n')
+#The date on which the highest value occurred
+o3 = s.groupby(pd.Grouper(freq='4M')).idxmax()
+print("The date on which the highest value occurred :")
+print(o3)
